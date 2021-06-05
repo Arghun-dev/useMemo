@@ -39,4 +39,28 @@ const MemoComponent = () => {
 
 fbonacci operation is a really heavy operation,
 if we don't use `useMemo` our application is going to get really slow, because it's going to recalculate every single time, user clicks the fibonacci.
-but `useMemo` solves this problem
+but `useMemo` solves this problem.
+
+Now look at this:
+
+```js
+const fib = useMemo(() => fibonacci(num), [num]);
+```
+
+in this function we're saying that just run the fib function whenever the `num` variable changes. otherwise don't run this function.
+
+Now, imagin we had writter the `fib` function like this:
+
+```js
+const fib = fibonacci(num)
+```
+
+This would be call every single time which component re-renders and this is bad.
+
+### overall
+
+what `useMemo` does is basically you give it a function, and you're gonna say, only run this function whenever the given parameter to it changes.
+
+## why when i changes another state in the component like `isGreen`, the fibonacci function runs??
+
+answer: actually, whenever the `isGreen` state changes, it's going to go back and run the `entire` component over again. And if I'm calcualating the `fibonacci` function every single time, it's very heavy and expensive.
